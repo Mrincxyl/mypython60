@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def Home(request):
+def MyHome(request):
     return render(request,'home.html')
 
 def Login(request):
