@@ -22,6 +22,7 @@ from TheDailyDraft import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("",views.MyHome, name="home"),
+    path("about/",views.About, name="about"),
     path('mylogin/',views.Login,name='login'),
     path('register/',views.Register,name='register')
     
