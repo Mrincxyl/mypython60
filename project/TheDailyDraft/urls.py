@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("",views.MyHome, name="home"),
     path("about/",views.About, name="about"),
+    path("pricing/",views.Pricing, name="pricing"),
     path('auth/',include('UserAuth.urls')),
     path('blogs/',include('BlogDrafts.urls'))
 ]
