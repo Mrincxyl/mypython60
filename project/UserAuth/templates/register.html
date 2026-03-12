@@ -12,7 +12,8 @@ Register Page
           </div>
           
             <div class="border border-slate-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-lg:mx-auto">
-            <form class="space-y-6">
+            <form class="space-y-6" method = "POST">
+              {% csrf_token %}
               <div class="mb-12">
                 <h1 class="text-slate-900 text-3xl font-semibold">Register</h1>
               </div>
@@ -59,7 +60,7 @@ Register Page
               </div>
 
               <div class="!mt-12">
-                <button type="button" class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer">
+                <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer">
                   Register
                 </button>
                 <p class="text-sm !mt-6 text-center text-slate-600">Already have an account <a href="{% url "login" %}" class="text-blue-600 font-medium hover:underline ml-1 whitespace-nowrap">Login here</a></p>
