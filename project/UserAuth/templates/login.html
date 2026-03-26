@@ -9,7 +9,8 @@ Login Page
       <div class="py-6 px-4">
         <div class="grid lg:grid-cols-2 items-center gap-6 max-w-6xl w-full">
           <div class="border border-slate-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-lg:mx-auto">
-            <form class="space-y-6">
+            <form class="space-y-6" method = 'POST'>
+              {% csrf_token %}
               <div class="mb-12">
                 <h1 class="text-slate-900 text-3xl font-semibold">Sign in</h1>
                 <p class="text-slate-600 text-[15px] mt-6 leading-relaxed">Sign in to your account and explore a world of possibilities. Your journey begins here.</p>
@@ -49,7 +50,7 @@ Login Page
               </div>
 
               <div class="!mt-12">
-                <button type="button" class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer">
+                <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer">
                   Sign in
                 </button>
                 <p class="text-sm !mt-6 text-center text-slate-600">Don't have an account <a href="{% url "register" %}" class="text-blue-600 font-medium hover:underline ml-1 whitespace-nowrap">Register here</a></p>
