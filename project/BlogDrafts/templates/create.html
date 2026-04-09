@@ -45,29 +45,30 @@ Create Blog | The Daily Draft
           >
         </div>
 
-        <!-- Category + Website -->
+        
+
+        <!-- Category + Slug -->
         <div class="grid md:grid-cols-2 gap-6">
 
           <div>
-            <label class="block mb-2 text-sm font-medium text-foreground">
-              Category
-            </label>
-            <input 
-              type="text"
-              name="category"
-              placeholder="Technology, Travel..."
-              class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
-            >
+            <select name="category" class="w-full py-3 px-4 rounded-lg border">
+            <option value="">Select Category</option>
+
+            {% for cat in data %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+            {% endfor %}
+
+            </select>
           </div>
 
           <div>
             <label class="block mb-2 text-sm font-medium text-foreground">
-              Author Website
+              Blog Slug
             </label>
             <input 
-              type="url"
-              name="website"
-              placeholder="https://example.com"
+              type="text"
+              name="slug"
+              placeholder="Blog Slug"
               class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
             >
           </div>
@@ -110,6 +111,22 @@ Create Blog | The Daily Draft
           </div>
         </div>
 
+        <!-- Visibility-->  
+        <div>
+          <label class="block mb-2 text-sm font-medium text-foreground">
+            Visibility
+          </label>
+
+          <select 
+            name="visibility"
+            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+          >
+            <option value="">Select Visibility</option>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+
         <!-- Checkbox -->
         <div class="flex items-start gap-3">
           <input 
@@ -126,6 +143,7 @@ Create Blog | The Daily Draft
         <!-- Submit Button -->
         <button
           type="submit"
+          name = "add_blog"
           class="w-full py-3 text-sm font-semibold rounded-lg bg-blue-600 text-primary-foreground hover:bg-primary-hover transition"
         >
           Publish Blog
