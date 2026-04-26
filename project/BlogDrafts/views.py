@@ -9,8 +9,12 @@ from django.utils.text import slugify
 # Create your views here.
 
 
-def Drafts(request):
-    return render(request,'allblogs.html')
+def Blogs(request):
+    
+    blogs = Blog.objects.filter(visibility='public').order_by('-created_at')
+    
+    data = {'blogs':blogs}
+    return render(request,'allblogs.html',data)
 
 @login_required(login_url='login')
 def Create(request):

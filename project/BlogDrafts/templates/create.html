@@ -8,56 +8,71 @@ Create Blog | The Daily Draft
 {% block content %}
 
 {% if user.is_superuser %}
-{% include "category.html" %} 
+{% include "category.html" %}
 {% endif %}
 
-<div class="max-w-4xl mx-auto px-6 py-12">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-  <!-- Heading -->
-  <div class="text-center mb-10">
-    <h1 class="text-4xl font-bold text-foreground">
+  <!-- Page Header -->
+  <div class="mb-10 text-center">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
       Create New Blog
     </h1>
-    <p class="text-muted-foreground-2 mt-2">
-      Share your ideas with the world through The Daily Draft
+    <p class="mt-3 text-sm sm:text-base text-muted-foreground-2 max-w-2xl mx-auto">
+      Write, organize, and publish your content professionally through
+      <span class="font-medium text-foreground">The Daily Draft</span>.
     </p>
   </div>
 
-  <!-- Form Card -->
-  <div class="bg-layer border border-layer-line rounded-xl shadow-sm p-8">
+  <!-- Form Container -->
+  <div class="bg-layer border border-layer-line rounded-2xl shadow-sm overflow-hidden">
 
-    <form method="POST" enctype="multipart/form-data">
+    <!-- Top Section -->
+    <div class="border-b border-layer-line px-6 sm:px-8 py-5 bg-background/40">
+      <h2 class="text-lg font-semibold text-foreground">
+        Blog Details
+      </h2>
+      <p class="mt-1 text-sm text-muted-foreground-2">
+        Fill in the information below to create and publish your blog post.
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form method="POST" enctype="multipart/form-data" class="px-6 sm:px-8 py-8">
       {% csrf_token %}
 
-      <div class="grid gap-6">
+      <div class="space-y-8">
 
         <!-- Blog Title -->
         <div>
           <label class="block mb-2 text-sm font-medium text-foreground">
             Blog Title
           </label>
-          <input 
+          <input
             type="text"
             name="title"
             placeholder="Enter blog title..."
-            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            class="w-full py-3 px-4 rounded-xl border border-layer-line bg-layer text-foreground placeholder:text-muted-foreground-2 focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-focus transition"
             required
           >
         </div>
 
-        
-
         <!-- Category + Slug -->
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div>
-            <select name="category" class="w-full py-3 px-4 rounded-lg border">
-            <option value="">Select Category</option>
+            <label class="block mb-2 text-sm font-medium text-foreground">
+              Category
+            </label>
+            <select
+              name="category"
+              class="w-full py-3 px-4 rounded-xl border border-layer-line bg-layer text-foreground focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-focus transition"
+            >
+              <option value="">Select Category</option>
 
-            {% for cat in data %}
-            <option value="{{ cat.id }}">{{ cat.name }}</option>
-            {% endfor %}
-
+              {% for cat in data %}
+              <option value="{{ cat.id }}">{{ cat.name }}</option>
+              {% endfor %}
             </select>
           </div>
 
@@ -65,27 +80,26 @@ Create Blog | The Daily Draft
             <label class="block mb-2 text-sm font-medium text-foreground">
               Blog Slug
             </label>
-            <input 
+            <input
               type="text"
               name="slug"
-              placeholder="Blog Slug"
-              class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+              placeholder="Enter blog slug"
+              class="w-full py-3 px-4 rounded-xl border border-layer-line bg-layer text-foreground placeholder:text-muted-foreground-2 focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-focus transition"
             >
           </div>
 
         </div>
 
-        <!-- Blog Description -->
+        <!-- Blog Content -->
         <div>
           <label class="block mb-2 text-sm font-medium text-foreground">
             Blog Content
           </label>
-
           <textarea
             name="content"
-            rows="6"
+            rows="8"
             placeholder="Write your blog content here..."
-            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            class="w-full py-3 px-4 rounded-xl border border-layer-line bg-layer text-foreground placeholder:text-muted-foreground-2 focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-focus transition resize-none"
           ></textarea>
         </div>
 
@@ -95,31 +109,27 @@ Create Blog | The Daily Draft
             Blog Thumbnail
           </label>
 
-          <div class="border-2 border-dashed border-layer-line rounded-lg p-6 text-center hover:border-primary transition">
-
-            <input 
+          <div class="rounded-xl border-2 border-dashed border-layer-line bg-background/30 p-6 hover:border-primary transition">
+            <input
               type="file"
               name="thumbnail"
               accept="image/*"
-              class="block w-full text-sm text-muted-foreground-1"
+              class="block w-full text-sm text-muted-foreground-1 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
             >
-
-            <p class="text-xs text-muted-foreground-2 mt-2">
-              PNG, JPG up to 5MB
+            <p class="mt-3 text-xs text-muted-foreground-2">
+              Supported formats: PNG, JPG. Maximum file size: 5MB.
             </p>
-
           </div>
         </div>
 
-        <!-- Visibility-->  
+        <!-- Visibility -->
         <div>
           <label class="block mb-2 text-sm font-medium text-foreground">
             Visibility
           </label>
-
-          <select 
+          <select
             name="visibility"
-            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            class="w-full py-3 px-4 rounded-xl border border-layer-line bg-layer text-foreground focus:outline-none focus:ring-2 focus:ring-primary-focus focus:border-primary-focus transition"
           >
             <option value="">Select Visibility</option>
             <option value="public">Public</option>
@@ -127,34 +137,36 @@ Create Blog | The Daily Draft
           </select>
         </div>
 
-        <!-- Checkbox -->
-        <div class="flex items-start gap-3">
-          <input 
+        <!-- Guidelines Checkbox -->
+        <div class="flex items-start gap-3 rounded-xl border border-layer-line bg-background/30 p-4">
+          <input
             type="checkbox"
             required
-            class="mt-1 size-4 border border-layer-line rounded text-primary"
+            class="mt-1 size-4 border border-layer-line rounded text-primary focus:ring-primary-focus"
           >
-          <p class="text-sm text-muted-foreground-2">
-            I confirm this content follows the
-            <a href="#" class="text-primary hover:underline">community guidelines</a>
+          <p class="text-sm text-muted-foreground-2 leading-6">
+            I confirm that this content follows the
+            <a href="#" class="font-medium text-primary hover:underline">
+              community guidelines
+            </a>.
           </p>
         </div>
 
-        <!-- Submit Button -->
-        <button
-          type="submit"
-          name = "add_blog"
-          class="w-full py-3 text-sm font-semibold rounded-lg bg-blue-600 text-primary-foreground hover:bg-primary-hover transition"
-        >
-          Publish Blog
-        </button>
+        <!-- Action Button -->
+        <div class="pt-2">
+          <button
+            type="submit"
+            name="add_blog"
+            class="inline-flex items-center justify-center w-full sm:w-auto min-w-[180px] py-3 px-6 text-sm font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-primary-focus focus:ring-offset-2 transition shadow-sm"
+          >
+            Publish Blog
+          </button>
+        </div>
 
       </div>
-
     </form>
 
   </div>
-
 </div>
 
 {% endblock content %}
