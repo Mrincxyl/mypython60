@@ -51,7 +51,9 @@ def Create(request):
                 messages.error(request,"Title and Content are required!")
                 return redirect('create')
             
-            
+            if not category_id:
+                messages.error(request,"Please select category of the blog")
+                return redirect('create')
             category = None
             if category_id:
                 try:
